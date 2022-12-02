@@ -20,9 +20,6 @@ class CartServices {
                 res.status(400).json({error: "product does not exist"})
             }
 
-            //console.log("ESTO ES PRODUCT DATA", productData);
-            
-
 
             const add = await ProductInCart.create({
                 cartId: productData.cartId,
@@ -43,8 +40,6 @@ class CartServices {
             const cart = await Cart.findOne({
                 where: {userId},
             })
-
-            console.log('___cart', cart.dataValues.id)
             const productsInCart = await Cart.findOne({
                 where: {userId},
                 include: [{
@@ -54,7 +49,6 @@ class CartServices {
                     },
                   }]
             })
-            console.log(productsInCart);
             return cart
         } catch (error) {
             throw error

@@ -10,7 +10,7 @@ const purchase = async (req, res, next) =>{
 
         const user = await UserServices.getOne(userId)
         const result = await PurchaseServices.createOrder(data)
-        console.log("Usuario ––>", user);
+        
 
         res.status(201).json(result)
 
@@ -35,7 +35,7 @@ const getAll = async (req, res, next) => {
         const {userId} = req.params
 
         const data = Number(userId)
-        console.log("Data", data);
+        
         const result = await PurchaseServices.seeOrders(data)
         res.json(result)
 

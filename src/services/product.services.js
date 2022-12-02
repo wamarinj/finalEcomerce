@@ -14,7 +14,7 @@ class ProductServices{
                     attributes:["username"]
                 },
             });
-            console.log(result)
+            
             const stock= []
             result.map((product)=>{
                 if(product.availableQty > 0 ){
@@ -34,7 +34,7 @@ class ProductServices{
     static async create (data){
         try {
             const newProduct = await Product.create(data);
-            // newProduct.userId = token.id  tomar el user Id del token seria lo ideal
+            
             return newProduct
         } catch (error) {
             throw error

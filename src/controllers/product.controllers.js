@@ -16,7 +16,7 @@ const getStock = async (req, res, next) => {
 const createProduct = async (req, res, next) =>{
     try {
         const data = req.body;
-        console.log(data)
+        
         const newProduct = await ProductServices.create(data)
         res.status(201).json(newProduct)
     } catch (error) {

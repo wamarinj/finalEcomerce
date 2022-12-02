@@ -5,7 +5,7 @@ const { Users,Products,Orders,ProductInCart,ProductInOrder,Cart  } = require("..
 
 initModels();
 
-const user = [
+const users = [
   {
     username: "Jack Sparrow",
     email: "jacksparrow@gmail.com",
@@ -33,7 +33,7 @@ const user = [
   }
 ];
 
-const product = [
+const products = [
   {
     name: "Hoodie Men",
     price: 120000,
@@ -86,7 +86,7 @@ const product = [
 
 ];
 
-const order = [
+const orders = [
   {
     totalPrice: 0,
     userId:1,
@@ -104,7 +104,7 @@ const order = [
   },
 ];
 
-const cart =[
+const carts =[
   {
     totalPrice: 0,
     userId: 1,
@@ -174,17 +174,26 @@ const productInOrder = [
   
 ];
 
-async function seeding(){
-  await db.sync({force: true})
-  console.log("sync ok");
-
-  
-  await forEach(user, (user)=> Users.create(user))
-  await forEach(product, (product)=> Products.create(product))
-  await forEach(cart, (cart)=> Cart.create(cart))
-  await forEach(order, (order)=> Orders.create(order))
-  await forEach(productInCart, (pri) => ProductInCart.create(pri))
-  await forEach(productInOrder, (pro)=> ProductInOrder.create(pro)) 
-  
-};
-seeding();
+db.sync({ force: true }).then(() => {
+  console.log("Sinronizado");
+  users.forEach(async (user) => await Users.create(user));
+  setTimeout(() => {
+    products.forEach(
+      async (product) => await Products.create(product)
+    );
+  }, 100);
+  setTimeout(() => {
+    carts.forEach(
+      async (cart) => await Cart.create(cart)
+    );
+  }, 200);
+  setTimeout(() => {
+    orders.forEach(async (order) => await Orders.create(order));
+  }, 250);
+  setTimeout(() => {
+    productInCart.forEach(async (pic) => await ProductInCart.create(pic));
+  }, 300);
+  setTimeout(() => {
+    productInOrder.forEach(async (pio) => await ProductInOrder.create(pio));
+  }, 350);
+});

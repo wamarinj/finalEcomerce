@@ -7,12 +7,9 @@ class AuthServices{
     static async authenticate (credentials){
         try {
             const { email, password } = credentials;
-            console.log('___email', email)
-            console.log('___password',password)
             const result = await Users.findOne({
                 where:{email}
             })
-            console.log(result);
             if (result){
                 const isValid = bcrypt.compareSync( password, result.password);
                 return isValid ? { isValid, result} : isValid 
@@ -28,7 +25,7 @@ class AuthServices{
         try {
             const token = jwt.sign( data, process.env.SECRET, {
             algorithm:'HS512',
-            expiresIn: '2d'
+            expiresIn: '1d'
             } );
             return token
         } catch (error) {

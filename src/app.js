@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
-console.log(process.env.DB_PASSWORD)
+
 db.authenticate()
 .then(() => console.log('Autenticacion ok'))
 .catch((error) => console.log(error));
